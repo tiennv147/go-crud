@@ -5,7 +5,7 @@ Implement basic function for mysql
 Learning go-lang: https://tour.golang.org/welcome/1
 
 # Task 2
-Learning Go-kit https://medium.com/swlh/getting-started-with-go-kit-f2ccf71d491f?
+Learning Go-kit https://medium.com/swlh/getting-started-with-go-kit-f2ccf71d491f
 
 # Task 3
 Build a backend service with 4 APIs 
