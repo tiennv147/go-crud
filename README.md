@@ -23,3 +23,5 @@ Model News:
  + CreatedAt (Date)
  + UpdatedAt (Date)
 ---
+Template projects:
+Reference: https://github.com/golang-standards/project-layout
