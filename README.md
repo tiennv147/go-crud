@@ -25,3 +25,8 @@ Model News:
 ---
 Template projects:
 Reference: https://github.com/golang-standards/project-layout
+
+
+---
+Recommend:
+For ORM (Object-relational mapping) you can consider using that library: https://gorm.io/
