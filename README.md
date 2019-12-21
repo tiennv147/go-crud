@@ -23,10 +23,23 @@ Model News:
  + CreatedAt (Date)
  + UpdatedAt (Date)
 ---
-Template projects:
-Reference: https://github.com/golang-standards/project-layout
 
+# Task 4:
+Research gRPC: https://grpc.io/
+Research implement JWT Token: https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/
+Write a Authentication service base on GoKit: https://gokit.io/ but expose APIs via gRPC
+ + Register
+ + Login response JWT Token
+ + Verify Token (response userID)
+
+# Task 5:
+Implement authentication for service CRUD news with authentication:
+ + Every request call to restful CRUD news service will have a token in header
+ + NewsService will call to AuthService to verify token valid or not (if yes will have userID)
+ +  Update model News with 2 fields: CreateBy & UpdateBy with userID response from AuthService
 
 ---
-Recommend:
-For ORM (Object-relational mapping) you can consider using that library: https://gorm.io/
+# Recommend:
+1. For ORM (Object-relational mapping) you can consider using that library: https://gorm.io/
+2. Go kit: https://gokit.io/
+3. Template projects: Reference: https://github.com/golang-standards/project-layout
