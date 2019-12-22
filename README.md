@@ -18,7 +18,7 @@ Build a backend service with 4 APIs
 Model News:
  + Name (string)
  + Thumbnail (url - string)
- + Content (string
+ + Content (string)
  + Tags (string)
  + CreatedAt (Date)
  + UpdatedAt (Date)
