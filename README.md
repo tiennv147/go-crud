@@ -28,9 +28,9 @@ Model News:
 Research gRPC: https://grpc.io/
 Research implement JWT Token: https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/
 Write a Authentication service base on GoKit: https://gokit.io/ but expose APIs via gRPC
- + Register
- + Login response JWT Token
- + Verify Token (response userID)
+ + Register - Restful
+ + Login response JWT Token - Restful
+ + Verify Token (response userID) - gRPC
 
 # Task 5:
 Implement authentication for service CRUD news with authentication:
