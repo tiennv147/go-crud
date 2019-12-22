@@ -43,3 +43,4 @@ Implement authentication for service CRUD news with authentication:
 1. For ORM (Object-relational mapping) you can consider using that library: https://gorm.io/
 2. Go kit: https://gokit.io/
 3. Template projects: Reference: https://github.com/golang-standards/project-layout
+4. Style guideline: https://github.com/uber-go/guide/blob/master/style.md
