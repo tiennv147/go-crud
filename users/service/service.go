@@ -47,7 +47,7 @@ func (u UserService) Login(ctx context.Context, username string, password string
 		return "", ErrorString{Message:"Wrong username or password"}
 	}
 
-	var exp = time.Now().Add(5 * time.Minute)
+	var exp = time.Now().Add(30 * time.Minute)
 	var claim = Claims{
 		Username:       user.Username,
 		StandardClaims: jwt.StandardClaims{

@@ -7,15 +7,16 @@ import (
 	"github.com/phamtanlong/go-crud/users/endpoints"
 	"github.com/phamtanlong/go-crud/users/http"
 	"github.com/phamtanlong/go-crud/users/service"
-	service2 "github.com/phamtanlong/go-crud/users/service"
 	"log"
 	"net"
 	http1 "net/http"
 )
 
-func main() {
-	log.Println("> start service users")
+const (
+	httpAddr = ":7777"
+)
 
+func main() {
 	// init database
 
 	db := initDatabase()
@@ -23,20 +24,22 @@ func main() {
 
 	// listen and serve
 
-	service := service2.UserService{DB:db}
+	service := service.UserService{DB:db}
+
 	points := endpoints.Endpoints{
 		Register: endpoints.MakeRegisterEndpoint(service),
 		Login:    endpoints.MakeLoginEndpoint(service),
 		Verify:   endpoints.MakeVerifyEndpoint(service),
 	}
 
-	listener, err := net.Listen("tcp", ":7777")
+	listener, err := net.Listen("tcp", httpAddr)
 	if err != nil {
 		log.Fatalf("> can not create net.Listener %v", err)
 	}
 
 	handler := http.NewHTTPHandler(points)
 
+	log.Println("> start service auth")
 	http1.Serve(listener, handler)
 }
 
@@ -52,4 +55,5 @@ func initDatabase() *gorm.DB {
 
 	return db
 }
+
 

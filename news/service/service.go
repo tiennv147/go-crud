@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"github.com/jinzhu/gorm"
+	"github.com/phamtanlong/go-crud/news/pb"
 	"log"
 )
 
@@ -15,6 +16,7 @@ type News struct {
 }
 type NewsService struct {
 	DB *gorm.DB
+	AuthenClient *pb.AuthenticationClient
 }
 
 func (n NewsService) Create(ctx context.Context, title string, thumbnail string, content string, tags string) (uint, error) {

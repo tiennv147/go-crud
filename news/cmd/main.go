@@ -6,10 +6,16 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/phamtanlong/go-crud/news/endpoints"
 	http1 "github.com/phamtanlong/go-crud/news/http"
+	"github.com/phamtanlong/go-crud/news/pb"
 	service "github.com/phamtanlong/go-crud/news/service"
+	"google.golang.org/grpc"
 	"log"
 	"net"
 	http "net/http"
+)
+
+const (
+	authenticationGrpcAddr = ":7770"
 )
 
 func main() {
@@ -20,15 +26,19 @@ func main() {
 	db := initDatabase()
 	defer db.Close()
 
+	// grpc authentication client
+	grpcAuthConn, authenClient := initAuthenticationClient()
+	defer grpcAuthConn.Close()
+
 	// listen and serve
 
-	service := service.NewsService{DB:db}
+	newService := service.NewsService{DB:db, AuthenClient:authenClient}
 
 	points := endpoints.Endpoints{
-		Create: endpoints.MakeCreateEndpoint(service),
-		Update: endpoints.MakeUpdateEndpoint(service),
-		Delete: endpoints.MakeDeleteEndpoint(service),
-		Read:   endpoints.MakeReadEndpoint(service),
+		Create: endpoints.MakeCreateEndpoint(newService),
+		Update: endpoints.MakeUpdateEndpoint(newService),
+		Delete: endpoints.MakeDeleteEndpoint(newService),
+		Read:   endpoints.MakeReadEndpoint(newService),
 	}
 
 	handler := http1.NewHTTPHandler(points)
@@ -52,4 +62,13 @@ func initDatabase() *gorm.DB {
 	db.AutoMigrate(&service.News{})
 
 	return db
+}
+
+func initAuthenticationClient() (*grpc.ClientConn, *pb.AuthenticationClient) {
+	conn, err := grpc.Dial(authenticationGrpcAddr, grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		return conn, nil
+	}
+	client := pb.NewAuthenticationClient(conn)
+	return conn, &client
 }
