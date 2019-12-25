@@ -8,25 +8,27 @@ import (
 )
 
 type CreateRequest struct {
+	Token     string
 	Title     string
 	Thumbnail string
 	Content   string
 	Tags      string
 }
 type CreateResponse struct {
-	Id  uint
+	Id    uint
 	Error error
 }
 
 func MakeCreateEndpoint(n service.NewsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(CreateRequest)
-		id, err := n.Create(ctx, req.Title, req.Thumbnail, req.Content, req.Tags)
+		id, err := n.Create(ctx, req.Token, req.Title, req.Thumbnail, req.Content, req.Tags)
 		return CreateResponse{Id: id, Error: err}, nil
 	}
 }
 
 type UpdateRequest struct {
+	Token     string
 	Id        uint
 	Title     string
 	Thumbnail string
@@ -40,13 +42,14 @@ type UpdateResponse struct {
 func MakeUpdateEndpoint(n service.NewsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(UpdateRequest)
-		err := n.Update(ctx, req.Id, req.Title, req.Thumbnail, req.Content, req.Tags)
+		err := n.Update(ctx, req.Token, req.Id, req.Title, req.Thumbnail, req.Content, req.Tags)
 		return UpdateResponse{Error: err}, nil
 	}
 }
 
 type DeleteRequest struct {
-	Id uint
+	Token string
+	Id    uint
 }
 type DeleteResponse struct {
 	Error error
@@ -55,23 +58,24 @@ type DeleteResponse struct {
 func MakeDeleteEndpoint(n service.NewsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(DeleteRequest)
-		err := n.Delete(ctx, req.Id)
+		err := n.Delete(ctx, req.Token, req.Id)
 		return DeleteResponse{Error: err}, nil
 	}
 }
 
 type ReadRequest struct {
-	Id uint
+	Token string
+	Id    uint
 }
 type ReadResponse struct {
-	News   *service.News
+	News  *service.News
 	Error error
 }
 
 func MakeReadEndpoint(n service.NewsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(ReadRequest)
-		N, err := n.Read(ctx, req.Id)
+		N, err := n.Read(ctx, req.Token, req.Id)
 		return ReadResponse{News: N, Error: err}, nil
 	}
 }

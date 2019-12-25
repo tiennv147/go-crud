@@ -21,6 +21,7 @@ func NewHTTPHandler(endpoints endpoints.Endpoints) http.Handler {
 func DecodeCreateRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req endpoints.CreateRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
+	req.Token = r.Header.Get("Authorization")
 	return req, err
 }
 func EncodeCreateResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
@@ -30,6 +31,7 @@ func EncodeCreateResponse(_ context.Context, w http.ResponseWriter, response int
 func DecodeUpdateRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req endpoints.UpdateRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
+	req.Token = r.Header.Get("Authorization")
 	return req, err
 }
 func EncodeUpdateResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
@@ -39,6 +41,7 @@ func EncodeUpdateResponse(_ context.Context, w http.ResponseWriter, response int
 func DecodeDeleteRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req endpoints.DeleteRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
+	req.Token = r.Header.Get("Authorization")
 	return req, err
 }
 func EncodeDeleteResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
@@ -48,6 +51,7 @@ func EncodeDeleteResponse(_ context.Context, w http.ResponseWriter, response int
 func DecodeReadRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req endpoints.ReadRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
+	req.Token = r.Header.Get("Authorization")
 	return req, err
 }
 func EncodeReadResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {

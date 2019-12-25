@@ -41,6 +41,9 @@ func main() {
 		Read:   endpoints.MakeReadEndpoint(newService),
 	}
 
+	// attach endpoint middleware here
+	//like: points.Create = middleware(points.Create)
+
 	handler := http1.NewHTTPHandler(points)
 
 	listener, err := net.Listen("tcp", ":8888")
@@ -64,11 +67,13 @@ func initDatabase() *gorm.DB {
 	return db
 }
 
-func initAuthenticationClient() (*grpc.ClientConn, *pb.AuthenticationClient) {
+func initAuthenticationClient() (*grpc.ClientConn, pb.AuthenticationClient) {
 	conn, err := grpc.Dial(authenticationGrpcAddr, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		return conn, nil
 	}
 	client := pb.NewAuthenticationClient(conn)
-	return conn, &client
+	return conn, client
 }
+
+
