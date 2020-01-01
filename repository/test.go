@@ -11,9 +11,9 @@ type TestDto struct {
 }
 
 func (testDto TestDto) findAll() (test []dto.Test, err error) {
-	rows, err := testDto.Db.Query("select * from test")
+	rows,err := testDto.Db.Query("select * from test")
 }
 
-func responsWithError(w http.ResponseWriter, code int, msg string) {
-	responsWithJson(w, code, map[string]string{"error": msg})
+func responsWithError(w http.ResponseWriter,code int, msg string ) {
+	responsWithJson(w,code,map[string]string{"error":msg)
 }
