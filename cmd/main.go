@@ -1,20 +1,27 @@
 package main
 
 import (
-	"log"
+	s "Go-Crud/go-crud/service"
+	"fmt"
 	"net/http"
-	s "service"
 
-	"github.com/gorilla/mux"
+	"tannv/go/src/github.com/gorilla/mux"
 )
 
 func main() {
-	route := mux.NewRouter()
 
-	route.HandleFunc("api/test", s.getAll).Methods("GET")
-	route.HandleFunc("api/test/{id}", s.getId).Methods("GET")
-	route.HandleFunc("api/test/create", s.CreateTest).Methods("POST")
-	route.HandleFunc("api/test/update", s.UpdateTest).Methods("PUT")
-	route.HandleFunc("api/test/{id}", s.DeleteTest).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(":8000", route))
+	fmt.Println("Go run ...")
+
+	router := mux.NewRouter()
+
+	router.HandleFunc("/api/v1/user/find", s.FindUser).Methods("GET")
+	router.HandleFunc("/api/v1/user/getall", s.GetAll).Methods("GET")
+	router.HandleFunc("/api/v1/user/create", s.CreateUser).Methods("POST")
+	router.HandleFunc("/api/v1/user/update", s.UpdateUser).Methods("PUT")
+	router.HandleFunc("/api/v1/user/delete", s.Delete).Methods("DELETE")
+
+	err := http.ListenAndServe(":8080", router)
+	if err != nil {
+		panic(err)
+	}
 }
