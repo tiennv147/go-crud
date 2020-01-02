@@ -1,0 +1,5 @@
+package endpoints
+
+func NewHttpRequest() {
+	
+}
