@@ -9,9 +9,10 @@ var (
 	listUser = make([]*dto.User, 0)
 )
 
+// function create user
 func CreateUser(user *dto.User) bool {
 	if user.Id != "" && user.Name != "" && user.Password != "" {
-		if userF, _ := FindUser(user.Id); userF == nil {
+		if userF, _ := FindUser(user.Id); userFgi == nil {
 			listUser = append(listUser, user)
 			return true
 		}
