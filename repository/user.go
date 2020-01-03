@@ -1,8 +1,8 @@
 package repository
 
 import (
+	"Service/Go-crud/go-crud/dto"
 	"errors"
-	"go-crud/dto"
 )
 
 var (
@@ -12,7 +12,7 @@ var (
 // function create user
 func CreateUser(user *dto.User) bool {
 	if user.Id != "" && user.Name != "" && user.Password != "" {
-		if userF, _ := FindUser(user.Id); userFgi == nil {
+		if userF, _ := FindUser(user.Id); userF == nil {
 			listUser = append(listUser, user)
 			return true
 		}
