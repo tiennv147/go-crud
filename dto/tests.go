@@ -1,13 +1,18 @@
 package dto
 
-import "time"
+import (
+	_ "time"
+
+	"github.com/jinzhu/gorm"
+)
 
 type Test struct {
-	Id        int64     `json:"id"`
-	Name      string    `json:"name"`
-	Thumbnail string    `json:"thumbnail"`
-	content   string    `json:"content"`
-	tags      string    `json:"tags"`
-	createdAt time.Time `json:"created_at"`
-	updatedAt time.Time `json:"updated_at"`
+	gorm.Model
+	// Id        int64     `json:"id"`
+	Name      string `json:"name"`
+	Thumbnail string `json:"thumbnail"`
+	Content   string `json:"content"`
+	Tags      string `json:"tags"`
+	// createdAt time.Time `json:"created_at"`
+	// updatedAt time.Time `json:"updated_at"`
 }
