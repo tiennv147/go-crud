@@ -38,6 +38,15 @@ Implement authentication for service CRUD news with authentication:
  + NewsService will call to AuthService to verify token valid or not (if yes will have userID)
  +  Update model News with 2 fields: CreateBy & UpdateBy with userID response from AuthService
 
+# Task 6:
+1. Learn how to use grpc-gateway: https://github.com/grpc-ecosystem/grpc-gateway
+2. Learn how to use ent: https://github.com/facebookincubator/ent
+3. Define all of request/response on protobuf
+4. Build first MVP of go-crud base on:
+ + grpc-gateway
+ + ent for ORM
+5. Add sample data to MySQL & demo for Account
+
 ---
 # Recommend:
 1. For ORM (Object-relational mapping) you can consider using that library: https://gorm.io/
